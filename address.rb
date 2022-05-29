@@ -1,11 +1,13 @@
 require 'httparty'
-# require 'pry'
-
-ADDRESS_VALIDATION_API_ADDRESS = "https://api.address-validator.net/api/verify?"
-ADDRESS_VALIDATION_API_KEY = "av-6e9d1cb48b5e8deab810e7b1d927a676"
-USA_COUNTRY_CODE = "US"
+require 'pry'
 
 class Address
+    ADDRESS_VALIDATION_API_KEY = "av-6e9d1cb48b5e8deab810e7b1d927a676"
+    ADDRESS_VALIDATION_API_ADDRESS = "https://api.address-validator.net"
+    USA_COUNTRY_CODE = "US"
+
+    attr_accessor :raw_street_address, :raw_city, :raw_postal_code, :address_line_one, :city, :postal_code
+
     def initialize(raw_street_address, raw_city, raw_postal_code)
         @raw_street_address = raw_street_address
         @raw_city = raw_city
@@ -15,7 +17,7 @@ class Address
     end
 
     def validateAddress
-        http_request_string = "#{ADDRESS_VALIDATION_API_ADDRESS}"\
+        http_request_string = "#{ADDRESS_VALIDATION_API_ADDRESS}/api/verify?"\
                             "StreetAddress=#{@raw_street_address}&"\
                             "City=#{@raw_city}&"\
                             "PostalCode=#{@raw_postal_code}&"\
@@ -24,6 +26,7 @@ class Address
                             "APIKey=#{ADDRESS_VALIDATION_API_KEY}"
 
         response = HTTParty.get(http_request_string)
+        binding.pry
         response_body = JSON.parse(response.body)
 
         @validation_status = response_body["status"]

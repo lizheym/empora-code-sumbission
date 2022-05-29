@@ -18,6 +18,11 @@ There are three possible responses from the address validation API (along with r
 The provided README specified only what to do when the address is SUSPECT or INVALID. I used some liberty and still printed the provided address if it was valid, and to mirror the INVALID case, I appended '-> Address Valid' for full information.
 
 ## Testing approach
+
+As a related note, I used `pry` to debug this program, and in case the reviewer of this code doesn't have `pry` available, I commented out the import.
+
+`gem install webmock`
+
 Explain the use of mock/stub
 Rspec unit tests, edge cases, etc
 
