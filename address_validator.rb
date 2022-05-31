@@ -1,13 +1,15 @@
 require 'csv'
 require_relative 'address'
-# require 'pry'
+require 'pry'
 
-def processFile fileName
-    CSV.foreach(fileName, headers: true, col_sep: ", ") do |row|
-        address = Address.new(row["Street Address"], row["City"], row["Postal Code"])
-        puts address.formattedAddressCorrectionResult
+class AddressValidator
+    def self.processFile(fileName)
+        CSV.foreach(fileName, headers: true, col_sep: ", ") do |row|
+            address = Address.new(row["Street Address"], row["City"], row["Postal Code"])
+            puts address.formattedAddressCorrectionResult
+        end
     end
 end
 
 inputFileName = ARGV[0]
-processFile(inputFileName)
+AddressValidator.processFile(inputFileName)
