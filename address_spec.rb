@@ -40,7 +40,7 @@ RSpec.describe Address do
             address
         end
 
-        it "uses HTTParty to hit the API" do
+        it "uses HTTParty to hit the API with the correct path and params" do
             expect(HTTParty)
                 .to have_received(:get)
                 .with(expected_request_string)
