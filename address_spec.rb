@@ -67,11 +67,27 @@ RSpec.describe Address do
         it "correctly concatenates and formats the output" do
             expect(address.rawAddress).to eq("123 E Maine Street, Columbuss, 43211")
         end
-    end
 
+        context "when is a field missing in the raw address" do
+            let(:raw_city) { nil }
+
+            it "ignores the missing value" do
+                expect(address.rawAddress).to eq("123 E Maine Street, , 43211")
+            end
+        end
+    end
+    
     describe "#correctedAddress " do
         it "correctly concatenates and formats the output" do
             expect(address.correctedAddress).to eq("123 E Main St, Columbus, 43210")
+        end
+
+        context "when is a field missing in the corrected address" do
+            let(:corrected_city) { nil }
+
+            it "ignores the missing value" do
+                expect(address.correctedAddress).to eq("123 E Main St, , 43210")
+            end
         end
     end
 
