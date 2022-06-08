@@ -5,7 +5,7 @@ class Address
     ADDRESS_VALIDATION_API_ADDRESS = "https://api.address-validator.net/api/verify?"
     USA_COUNTRY_CODE = "US"
 
-    attr_accessor :raw_street_address, :raw_city, :raw_postal_code, :address_line_one, :city, :postal_code, :validation_status
+    attr_reader :raw_street_address, :raw_city, :raw_postal_code, :address_line_one, :city, :postal_code, :validation_status
 
     def initialize(raw_street_address, raw_city, raw_postal_code)
         @raw_street_address = raw_street_address
